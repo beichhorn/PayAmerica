@@ -50,10 +50,8 @@
         $response = $dataQueue->SendDataQueue(2048, $Data);
         $response = $dataQueue->SendDataQueue(2048, $Data); // Data Queue Issues
 
-        // Set up Receive Data Queue
-        $dataQueue->SetDataQName($retDQName, $DataQLib);
-
         // // Receive RESPONSES from Data Queue until '**EOD**'
+        $dataQueue->SetDataQName($retDQName, $DataQLib);
         $data = "";
         $output = "";
         while ($data != '**EOD**') {
