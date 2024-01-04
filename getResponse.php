@@ -39,12 +39,10 @@
 
         // Get Data Queue and Return Data Queue Names
         // 17 = EasyCall
-        $sql = 'SELECT PIDTAQ FROM ' .$DataQLib.'.RTPIDP WHERE "PIPRC#" = 17';
+        $sql = 'SELECT CONCAT(PIDTAQ, PIRDTQ) as DATAQUEUES FROM ' .$DataQLib.'.RTPIDP WHERE "PIPRC#" = 17';
         $rs[] = $conn->executeQuery($sql);
-        $sql = 'SELECT PIRDTQ FROM ' .$DataQLib.'.RTPIDP WHERE "PIPRC#" = 17';
-        $rs[] = $conn->executeQuery($sql);
-        $DQName = $rs[0][0];
-        $retDQName = $rs[1][0];
+        $DQName = substr($rs[0][0],0,10);
+        $retDQName = substr($rs[0][0],10,10);
 
         // Send REQUEST ($in) to Data Queue
         $dataQueue = new DataQueue($conn);
